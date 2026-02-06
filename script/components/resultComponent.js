@@ -1,5 +1,7 @@
 import { resultController } from "../controller/resultController.js";
 import { roundToTwo } from "../utils/roundNum.js";
+import { currencyController } from "../controller/currencyController.js";
+import { useValidate } from "../utils/validate.js";
 
 const SUBTOTAL_CONTAINER = document.getElementById("subtotal-items");
 const TAX_CONTAINER = document.getElementById("tax-items");
@@ -13,19 +15,21 @@ const PAYMENT_MISMATCH = document.getElementById("payment-mismatch");
 
 const formatter = new Intl.NumberFormat('en-US');
 
+const currency = useValidate(currencyController.getCurrentSymbol);
+
 function clearResultItems() {
     SUBTOTAL_CONTAINER.innerHTML = "";
     TAX_CONTAINER.innerHTML = "";
     DISCOUNT_CONTAINER.innerHTML = "";
-    SUBTOTAL_TOTAL.innerText = "0 $";
-    TAX_TOTAL.innerText = "+0 $";
-    DISCOUNT_TOTAL.innerText = "-0 $";
-    FINAL_TOTAL.innerText = "0 $";
+    SUBTOTAL_TOTAL.innerText = "0 " + currency();
+    TAX_TOTAL.innerText = "+0 " + currency();
+    DISCOUNT_TOTAL.innerText = "-0 " + currency();
+    FINAL_TOTAL.innerText = "0 " + currency();
 }
 
-export function setupResultComponent() {
+export function setupResultComponent(callbacks) {
     clearResultItems();
-    resultController.setupListeners();
+    resultController.setupListeners(callbacks);
 }
 
 function formatNumber(number) {
@@ -35,9 +39,9 @@ function formatNumber(number) {
 function createSubtotalItem(name, value, amount, total) {
     let subtotalTemplate = `
 <div class="flex flex-row items-baseline gap-3">
-<span>${name} (${amount} x ${formatNumber(value)} $)</span>
+<span>${name} (${amount} x ${formatNumber(value)} ${currency()})</span>
 <div class="flex-1 border-b border-dashed"></div>
-<span class="ml-auto">${formatNumber(total)} $</span>
+<span class="ml-auto">${formatNumber(total)} ${currency()}</span>
 </div>`;
     return document.createRange().createContextualFragment(subtotalTemplate);
 }
@@ -47,7 +51,7 @@ export function clearSubtotalItem() {
 }
 
 export function renderSubtotalTotal(subtotalTotal) {
-    SUBTOTAL_TOTAL.innerText = formatNumber(subtotalTotal) + " $";
+    SUBTOTAL_TOTAL.innerText = formatNumber(subtotalTotal) + " " + currency();
 }
 
 export function renderSubtotalItem(SubtotalObject) {
@@ -61,7 +65,7 @@ function createTaxItem(name, value) {
 <div class="flex flex-row items-baseline gap-3">
 <span class="text-error">${name}</span>
 <div class="flex-1 border-b border-error border-dashed"></div>
-<span class="text-error">+${formatNumber(value)} $</span>
+<span class="text-error">+${formatNumber(value)} ${currency()}</span>
 </div>
 `;
     return document.createRange().createContextualFragment(taxTemplate);
@@ -72,7 +76,7 @@ export function clearTaxItem() {
 }
 
 export function renderTaxTotal(taxTotal) {
-    TAX_TOTAL.innerText = "+" + formatNumber(taxTotal) + " $";
+    TAX_TOTAL.innerText = "+" + formatNumber(taxTotal) + " " + currency();
 }
 
 export function renderTaxItem(TaxesObject) {
@@ -85,7 +89,7 @@ function createDiscountItem(name, value) {
 <div class="flex flex-row items-baseline gap-3">
 <span class="text-success">${name}</span>
 <div class="flex-1 border-b border-success border-dashed"></div>
-<span class="text-success">-${formatNumber(value)} $</span>
+<span class="text-success">-${formatNumber(value)} ${currency()}</span>
 </div>
 `;
     return document.createRange().createContextualFragment(discountTemplate);
@@ -96,7 +100,7 @@ export function clearDiscountItem() {
 }
 
 export function renderDiscountTotal(discountsTotal) {
-    DISCOUNT_TOTAL.innerText = "-" + formatNumber(discountsTotal) + " $";
+    DISCOUNT_TOTAL.innerText = "-" + formatNumber(discountsTotal) + " " + currency();
 }
 
 export function renderDiscountItem(DiscountsObject) {
@@ -117,19 +121,19 @@ let peopleCausesKey = Object.keys(peopleCauses);
 function generatePeopleCause(type, rate, price, maxPrice, value) {
     switch (type) {
         case "rate":
-            return `Paid ${rate}% of total | ${formatNumber(value)} $`;
+            return `Paid ${rate}% of total | ${formatNumber(value)} ${currency()}`;
         case "fixed":
-            return `Paid fixed amount | ${formatNumber(value)} $`;
+            return `Paid fixed amount | ${formatNumber(value)} ${currency()}`;
         case "paid":
-            return `Paid by others | ${formatNumber(0)} $`;
+            return `Paid by others | ${formatNumber(0)} ${currency()}`;
         case "NotExceed":
-            return `Paid not to exceed ${formatNumber(maxPrice)} $ | ${formatNumber(value)} $`;
+            return `Paid not to exceed ${formatNumber(maxPrice)} ${currency()} | ${formatNumber(value)} ${currency()}`;
         case "reduction":
-            return `Paid reduction of ${formatNumber(price)} $ | ${formatNumber(value)} $`;
+            return `Paid reduction of ${formatNumber(price)} ${currency()} | ${formatNumber(value)} ${currency()}`;
         case "equal":
-            return `Paid equally | ${formatNumber(value)} $`;
+            return `Paid equally | ${formatNumber(value)} ${currency()}`;
         default:
-            return `Missing ${formatNumber(value)} $`;
+            return `Missing ${formatNumber(value)} ${currency()}`;
     }
 }
 
@@ -145,7 +149,7 @@ function createPeopleItem(name, type, rate, price, maxPrice, value) {
 }
 
 export function renderFinalTotal(finalTotal) {
-    FINAL_TOTAL.innerText = formatNumber(finalTotal) + " $";
+    FINAL_TOTAL.innerText = formatNumber(finalTotal) + " " + currency();
 }
 
 export function clearPaymentMismatch() {

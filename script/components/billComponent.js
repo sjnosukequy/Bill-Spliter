@@ -1,6 +1,8 @@
 import { billController } from "../controller/billController.js";
 import { UUID } from "../uuidjs.js";
 import { debounce } from "../utils/debounce.js";
+import {minusIcon} from "../libs/icon/icons/minusIcon.js"
+
 let billTemplate = `
 <div class="flex flex-row gap-2">
 <input
@@ -9,17 +11,6 @@ type="text"
 placeholder="Item Name"
 class="input input-bordered w-full" />
 <label class="input validator">
-<i class="fa-solid fa-dollar-sign"></i>
-<input
-name="bill-price"
-type="number"
-class="tabular-nums"
-required
-placeholder="Item Price"
-pattern="[0-9]*"
-min="1" />
-</label>
-<label class="input validator">
 <i class="fa-solid fa-cubes-stacked"></i>
 <input
 name="bill-amount"
@@ -27,6 +18,17 @@ type="number"
 class="tabular-nums"
 required
 placeholder="Item Amount"
+pattern="[0-9]*"
+min="1" />
+</label>
+<label class="input validator">
+<i class="fa-solid fa-dollar-sign"></i>
+<input
+name="bill-price"
+type="number"
+class="tabular-nums"
+required
+placeholder="Item Price"
 pattern="[0-9]*"
 min="1" />
 </label>

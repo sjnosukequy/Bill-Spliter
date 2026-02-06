@@ -6,10 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0" />
     <title>Bill Spliter</title>
-    <link
+    <!-- <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-      type="text/css" />
+      type="text/css" /> -->
     <link
       rel="stylesheet"
       href="./style/daisyUI.css"
@@ -35,148 +35,188 @@
       type="text/css" />
   </head>
 
-  <body class="w-[97vw] h-screen overflow-y-auto overflow-x-hidden">
-    <div class="h-min-screen flex flex-col gap-10 w-full lg:w-2/3 justify-self-center overflow-hidden p-5">
-      <!-- header -->
-      <div class="flex flex-row justify-between items-center gap-10">
-        <div class="flex flex-col gap-2">
-          <h1 class="text-4xl font-bold">Bill Spliter</h1>
-          <p class="font-light">Split the bill with friends and family</p>
-        </div>
-        <div
-          class="dropdown dropdown-hover dropdown-bottom dropdown-end"
-          id="List_Theme">
-          <button
-            tabindex="0"
-            role="button"
-            class="btn btn-primary m-1">
-            Light
-          </button>
-          <ul
-            tabindex="-1"
-            class="dropdown-content menu bg-base-300 rounded-box z-1 w-52 p-2 shadow-sm h-100 flex-col flex-nowrap overflow-y-scroll"></ul>
-        </div>
-      </div>
-      <!-- body -->
-      <div class="flex flex-col gap-5">
-        <div class="w-full bg-base-200 rounded-lg p-10">
-          <div class="flex flex-row items-center gap-3">
-            <i class="fa-solid fa-user text-lg"></i>
-            <p class="font-bold text-lg">People</p>
+  <body class="h-screen overflow-y-hidden overflow-x-hidden">
+    <div class="h-screen overflow-y-auto">
+      <div class="flex flex-col gap-10 w-full lg:w-2/3 justify-self-center overflow-hidden p-5">
+        <!-- header -->
+        <div class="flex flex-row justify-between items-center gap-10">
+          <div class="flex flex-col gap-2">
+            <h1 class="text-4xl font-bold">Bill Spliter</h1>
+            <p class="font-light">Split the bill with friends and family</p>
           </div>
-          <p class="font-light">Add people to split the bill</p>
-          <div
-            class="mb-5 mt-2 flex flex-col gap-9"
-            id="People_Items"></div>
-          <button
-            class="btn btn-neutral flex flex-row gap-3 items-center p-3 w-full rounded-lg"
-            id="Add_People_Button">
-            <i class="fa-solid fa-plus"></i>
-            <p>Add People</p>
-          </button>
-        </div>
-
-        <div class="w-full bg-base-200 rounded-lg p-10">
-          <div class="flex flex-row items-center gap-3">
-            <i class="fa-solid fa-dollar-sign text-lg"></i>
-            <p class="font-bold text-lg">Bills</p>
-          </div>
-          <p class="font-light">Add and manage your bill items</p>
-          <div
-            class="mb-5 mt-2 flex flex-col gap-3"
-            id="Bill_Items"></div>
-          <button
-            class="btn btn-neutral flex flex-row gap-3 items-center p-3 w-full rounded-lg"
-            id="Add_Bill_Item_Button">
-            <i class="fa-solid fa-plus"></i>
-            <p>Add Bill Items</p>
-          </button>
-        </div>
-
-        <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <div class="w-full bg-base-200 rounded-lg p-10">
-            <div class="flex flex-row items-center gap-3">
-              <i class="fa-solid fa-percent text-lg"></i>
-              <p class="font-bold text-lg">Taxes / Fees/ Tips</p>
-            </div>
-            <p class="font-light">Add Taxes / Fees / Tips to your bills</p>
-            <div
-              class="mb-5 mt-2 flex flex-col gap-9"
-              id="taxes-items"></div>
-            <button
-              class="btn btn-neutral flex flex-row gap-3 items-center p-3 w-full rounded-lg"
-              id="Add_Tax_Button">
-              <i class="fa-solid fa-plus"></i>
-              <p>Add Taxes</p>
-            </button>
-          </div>
-          <div class="w-full bg-base-200 rounded-lg p-10">
-            <div class="flex flex-row items-center gap-3">
-              <i class="fa-solid fa-tag text-lg"></i>
-              <p class="font-bold text-lg">Discounts</p>
-            </div>
-            <p class="font-light">Add discounts to your bills</p>
-            <div
-              class="mb-5 mt-2 flex flex-col gap-9"
-              id="discounts-items"></div>
-            <button
-              class="btn btn-neutral flex flex-row gap-3 items-center p-3 w-full rounded-lg"
-              id="Add_Discount_Button">
-              <i class="fa-solid fa-plus"></i>
-              <p>Add Discounts</p>
-            </button>
-          </div>
-        </div>
-
-        <div class="w-full bg-base-200 rounded-lg p-10 flex flex-col gap-5">
-          <div class="flex flex-row items-center gap-3">
-            <i class="fa-solid fa-calculator text-lg"></i>
-            <p class="font-bold text-lg">Split Results</p>
-          </div>
-
           <div>
-            <div class="flex flex-col gap-7">
-              <!-- SubTotal -->
-              <div class="bg-base-100 border border-slate-200 p-5 rounded-lg flex flex-col gap-3">
-                <div class="flex flex-row justify-between text-lg">
-                  <p class="font-bold">SubTotals:</p>
-                  <p class="font-bold" id="subtotal-total">0 $</p>
-                </div>
-                <div class="flex flex-col gap-5" id="subtotal-items"></div>
-              </div>
+            <div
+              class="dropdown dropdown-hover dropdown-bottom dropdown-end"
+              id="List_Currency">
+              <button
+                tabindex="0"
+                role="button"
+                id="currency-button"
+                class="btn btn-secondary m-1"></button>
+              <ul
+                tabindex="-1"
+                class="dropdown-content menu bg-base-300 rounded-box z-1 w-52 p-2 shadow-sm max-h-100 flex-col flex-nowrap overflow-y-scroll"></ul>
+            </div>
 
-              <!-- Discount -->
-              <div class="bg-base-100 border border-success p-5 rounded-lg flex flex-col gap-3">
-                <div class="flex flex-row justify-between text-success text-lg">
-                  <p class="font-bold">Discounts:</p>
-                  <p class="font-bold" id="discount-total">-0 $</p>
-                </div>
-                <div class="flex flex-col gap-5" id="discount-items"></div>
-              </div>
+            <div
+              class="dropdown dropdown-hover dropdown-bottom dropdown-end"
+              id="List_Theme">
+              <button
+                tabindex="0"
+                role="button"
+                id="theme-button"
+                class="btn btn-primary m-1">
+                Light
+              </button>
+              <ul
+                tabindex="-1"
+                class="dropdown-content menu bg-base-300 rounded-box z-1 w-52 p-2 shadow-sm h-100 flex-col flex-nowrap overflow-y-scroll"></ul>
+            </div>
+          </div>
+        </div>
+        <!-- body -->
+        <div class="flex flex-col gap-5">
+          <div class="w-full bg-base-200 rounded-lg p-10">
+            <div class="flex flex-row items-center gap-3">
+              <i class="fa-solid fa-user text-lg"></i>
+              <p class="font-bold text-lg">People</p>
+            </div>
+            <p class="font-light">Add people to split the bill</p>
+            <div
+              class="mb-5 mt-2 flex flex-col gap-9"
+              id="People_Items"></div>
+            <button
+              class="btn btn-neutral flex flex-row gap-3 items-center p-3 w-full rounded-lg"
+              id="Add_People_Button">
+              <i class="fa-solid fa-plus"></i>
+              <p>Add People</p>
+            </button>
+          </div>
 
-              <!-- Taxes -->
-              <div class="bg-base-100 border border-error p-5 rounded-lg flex flex-col gap-3">
-                <div class="flex flex-row justify-between text-error text-lg">
-                  <p class="font-bold">Taxes/Fees/Tips:</p>
-                  <p class="font-bold" id="tax-total">+0 $</p>
-                </div>
-                <div class="flex flex-col gap-5" id="tax-items"></div>
-              </div>
+          <div class="w-full bg-base-200 rounded-lg p-10">
+            <div class="flex flex-row items-center gap-3">
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <p class="font-bold text-lg">Bills</p>
+            </div>
+            <p class="font-light">Add and manage your bill items</p>
+            <div
+              class="mb-5 mt-2 flex flex-col gap-3"
+              id="Bill_Items"></div>
+            <button
+              class="btn btn-neutral flex flex-row gap-3 items-center p-3 w-full rounded-lg"
+              id="Add_Bill_Item_Button">
+              <i class="fa-solid fa-plus"></i>
+              <p>Add Bill Items</p>
+            </button>
+          </div>
 
-              <div class="bg-base-100 border border-primary p-5 rounded-lg flex flex-col gap-3">
-                <div class="flex flex-row justify-between text-primary text-lg">
-                  <p class="font-bold">Final Total:</p>
-                  <p class="font-bold" id="final-total">0 $</p>
-                </div>
-                <div class="flex flex-col gap-5" id="final-items"></div>
+          <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div class="w-full bg-base-200 rounded-lg p-10">
+              <div class="flex flex-row items-center gap-3">
+                <i class="fa-solid fa-percent text-lg"></i>
+                <p class="font-bold text-lg">Taxes / Fees/ Tips</p>
               </div>
-
-              <div id="payment-mismatch">
+              <p class="font-light">Add Taxes / Fees / Tips to your bills</p>
+              <div
+                class="mb-5 mt-2 flex flex-col gap-9"
+                id="taxes-items"></div>
+              <button
+                class="btn btn-neutral flex flex-row gap-3 items-center p-3 w-full rounded-lg"
+                id="Add_Tax_Button">
+                <i class="fa-solid fa-plus"></i>
+                <p>Add Taxes</p>
+              </button>
+            </div>
+            <div class="w-full bg-base-200 rounded-lg p-10">
+              <div class="flex flex-row items-center gap-3">
+                <i class="fa-solid fa-tag text-lg"></i>
+                <p class="font-bold text-lg">Discounts</p>
               </div>
+              <p class="font-light">Add discounts to your bills</p>
+              <div
+                class="mb-5 mt-2 flex flex-col gap-9"
+                id="discounts-items"></div>
+              <button
+                class="btn btn-neutral flex flex-row gap-3 items-center p-3 w-full rounded-lg"
+                id="Add_Discount_Button">
+                <i class="fa-solid fa-plus"></i>
+                <p>Add Discounts</p>
+              </button>
             </div>
           </div>
 
-          <!-- <div class="flex flex-col gap-3">
+          <div class="w-full bg-base-200 rounded-lg p-10 flex flex-col gap-5">
+            <div class="flex flex-row items-center gap-3">
+              <i class="fa-solid fa-calculator text-lg"></i>
+              <p class="font-bold text-lg">Split Results</p>
+            </div>
+
+            <div>
+              <div class="flex flex-col gap-7">
+                <!-- SubTotal -->
+                <div class="bg-base-100 border border-slate-200 p-5 rounded-lg flex flex-col gap-3">
+                  <div class="flex flex-row justify-between text-lg">
+                    <p class="font-bold">SubTotals:</p>
+                    <p
+                      class="font-bold"
+                      id="subtotal-total">
+                      0 $
+                    </p>
+                  </div>
+                  <div
+                    class="flex flex-col gap-5"
+                    id="subtotal-items"></div>
+                </div>
+
+                <!-- Discount -->
+                <div class="bg-base-100 border border-success p-5 rounded-lg flex flex-col gap-3">
+                  <div class="flex flex-row justify-between text-success text-lg">
+                    <p class="font-bold">Discounts:</p>
+                    <p
+                      class="font-bold"
+                      id="discount-total">
+                      -0 $
+                    </p>
+                  </div>
+                  <div
+                    class="flex flex-col gap-5"
+                    id="discount-items"></div>
+                </div>
+
+                <!-- Taxes -->
+                <div class="bg-base-100 border border-error p-5 rounded-lg flex flex-col gap-3">
+                  <div class="flex flex-row justify-between text-error text-lg">
+                    <p class="font-bold">Taxes/Fees/Tips:</p>
+                    <p
+                      class="font-bold"
+                      id="tax-total">
+                      +0 $
+                    </p>
+                  </div>
+                  <div
+                    class="flex flex-col gap-5"
+                    id="tax-items"></div>
+                </div>
+
+                <div class="bg-base-100 border border-primary p-5 rounded-lg flex flex-col gap-3">
+                  <div class="flex flex-row justify-between text-primary text-lg">
+                    <p class="font-bold">Final Total:</p>
+                    <p
+                      class="font-bold"
+                      id="final-total">
+                      0 $
+                    </p>
+                  </div>
+                  <div
+                    class="flex flex-col gap-5"
+                    id="final-items"></div>
+                </div>
+
+                <div id="payment-mismatch"></div>
+              </div>
+            </div>
+
+            <!-- <div class="flex flex-col gap-3">
             <div class="flex flex-row p-5 rounded-lg border justify-between items-center gap-5">
               <div class="flex flex-col">
                 <p class="font-bold">Tip</p>
@@ -186,54 +226,37 @@
             </div>
           </div> -->
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <button class="btn btn-neutral flex flex-row gap-3 items-center p-3 rounded-lg w-full">
-              <i class="fa-solid fa-file-export"></i>
-              <p>Export PNG</p>
-            </button>
-            <button class="btn btn-neutral flex flex-row gap-3 items-center p-3 rounded-lg w-full">
-              <i class="fa-solid fa-file-export"></i>
-              <p>Export PDF</p>
-            </button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <button class="btn btn-neutral flex flex-row gap-3 items-center p-3 rounded-lg w-full">
+                <i class="fa-solid fa-file-export"></i>
+                <p>Export PNG</p>
+              </button>
+              <button class="btn btn-neutral flex flex-row gap-3 items-center p-3 rounded-lg w-full">
+                <i class="fa-solid fa-file-export"></i>
+                <p>Export PDF</p>
+              </button>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="absolute w-screen h-screen inset-0 z-50 bg-base-100"
+      id="loader">
+      <div class="banter-loader">
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
       </div>
     </div>
     <script
       src="./script/main.js"
       type="module"></script>
   </body>
-
-  <svg
-    class="premium-glass-svg3"
-    xmlns="http://www.w3.org/2000/svg"
-    width="0"
-    height="0"
-    style="position: absolute; overflow: hidden">
-    <defs>
-      <filter
-        id="glass-distortion3"
-        x="0%"
-        y="0%"
-        width="100%"
-        height="100%">
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.02 0.02"
-          numOctaves="2"
-          seed="92"
-          result="noise"></feTurbulence>
-        <feGaussianBlur
-          in="noise"
-          stdDeviation="2"
-          result="blurred"></feGaussianBlur>
-        <feDisplacementMap
-          in="SourceGraphic"
-          in2="blurred"
-          scale="81"
-          xChannelSelector="R"
-          yChannelSelector="G"></feDisplacementMap>
-      </filter>
-    </defs>
-  </svg>
 </html>

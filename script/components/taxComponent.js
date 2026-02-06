@@ -3,7 +3,7 @@ import { debounce } from "../utils/debounce.js";
 import { taxController } from "../controller/taxController.js";
 
 let taxType = {
-    "fixed": `<i class="fa-solid fa-cubes-stacked"></i> Fixed Amount`,
+    "fixed": `<i class="fa-solid fa-dollar-sign"></i> Fixed Amount`,
     "percentage": `<i class="fa-solid fa-percent"></i> Percentage`,
 }
 

@@ -20,6 +20,7 @@ import {
     renderPaymentMismatch,
     clearPaymentMismatch
 } from "../components/resultComponent.js";
+import { currencyController } from "./currencyController.js";
 
 export class resultController {
     static prevTotalBill = 0;
@@ -32,32 +33,51 @@ export class resultController {
     static prevBillsObjects = {};
     static prevPeopleObjects = {};
 
+    static prevCurrency = currencyController.getCurrentSymbol();
+
     static calculateTotalBill() {
         let total = billController.calculateTotal();
         return total;
     }
 
-    static setupListeners(uiObject) {
-        const options = { attributes: true, childList: true, subtree: true, characterData: false };
+    static setupListeners(callbacks) {
+        const options = { attributes: true, childList: true, subtree: true, characterData: false, attributeOldValue: true };
 
-        const debouncedUpdateResult = debounce(() => {
-            resultController.updateResult(uiObject);
-        });
+        const debouncedUpdateResult = debounce(resultController.updateResult, 1000);
 
-        const callback = (mutationList, observer) => {
+        const MutationCallBack = (mutationList, observer) => {
+
+            // DEBUG
             // for (const mutation of mutationList) {
             //     if (mutation.type === "childList") {
             //         console.log("A child node has been added or removed.");
             //     } else if (mutation.type === "attributes") {
-            //         console.log(`The ${mutation.attributeName} attribute was modified.`);
+            //         console.log(`The ${mutation.attributeName} ${mutation.target} attribute was modified.`);
             //     } else if (mutation.type === "characterData") {
             //         console.log(`The ${mutation.characterData} character data was modified.`);
             //     }
             // }
+
+            for (const mutation of mutationList) {
+                // console.log(mutation.target)
+                if (mutation.target.id == "theme-button") {
+                    console.log("skip render")
+                    return
+                }
+                if(mutation.target.id == "loader"){
+                    console.log("skip render")
+                    return
+                }
+            }
+
+            if (callbacks.renderIcon) {
+                callbacks.renderIcon();
+            }
+
             debouncedUpdateResult();
         };
 
-        const observer = new MutationObserver(callback);
+        const observer = new MutationObserver(MutationCallBack);
         observer.observe(document.body, options);
     }
 
@@ -72,13 +92,15 @@ export class resultController {
 
         let finalTotal = totalBill
         let peopleSortedObjects = peopleController.getAllSortedByTypePeople();
+
+        let currentCurrency = currencyController.getCurrentSymbol();
         // let people = peopleController.getAllPeople();
 
-        if (totalBill != resultController.prevTotalBill) {
+        if (totalBill != resultController.prevTotalBill || resultController.prevCurrency !== currentCurrency) {
             renderSubtotalTotal(totalBill);
             resultController.prevTotalBill = totalBill;
         }
-        if (resultController.compareTwoObjects(billObjects, resultController.prevBillsObjects) == false) {
+        if (resultController.compareTwoObjects(billObjects, resultController.prevBillsObjects) == false || resultController.prevCurrency !== currentCurrency) {
             clearSubtotalItem();
             let array = Object.entries(billObjects)
             array = array.filter(entry => entry[1].price > 0 && entry[1].amount > 0)
@@ -92,12 +114,12 @@ export class resultController {
 
 
         let discountsTotal = resultController.handleDiscountsResult(discountsSummary, totalBill);
-        if (discountsTotal != resultController.prevDiscountsTotal) {
+        if (discountsTotal != resultController.prevDiscountsTotal || resultController.prevCurrency !== currentCurrency) {
             renderDiscountTotal(discountsTotal);
             resultController.prevDiscountsTotal = discountsTotal;
         }
         let discountsObjects = resultController.getAllCalculatedDiscounts(totalBill);
-        if (resultController.compareTwoObjects(discountsObjects, resultController.prevDiscountsObjects) == false) {
+        if (resultController.compareTwoObjects(discountsObjects, resultController.prevDiscountsObjects) == false || resultController.prevCurrency !== currentCurrency) {
             clearDiscountItem()
             let array = Object.entries(discountsObjects)
             array = array.filter(entry => entry[1].price > 0)
@@ -112,12 +134,12 @@ export class resultController {
         // console.log("Final Total after discounts: ", finalTotal);
 
         let taxesTotal = resultController.handleTaxesResult(taxesSummary, finalTotal);
-        if (taxesTotal != resultController.prevTaxesTotal) {
+        if (taxesTotal != resultController.prevTaxesTotal || resultController.prevCurrency !== currentCurrency) {
             renderTaxTotal(taxesTotal);
             resultController.prevTaxesTotal = taxesTotal;
         }
         let taxesObjects = resultController.getAllCalculatedTaxes(finalTotal)
-        if (resultController.compareTwoObjects(taxesObjects, resultController.prevTaxesObjects) == false) {
+        if (resultController.compareTwoObjects(taxesObjects, resultController.prevTaxesObjects) == false || resultController.prevCurrency !== currentCurrency) {
             clearTaxItem();
             let array = Object.entries(taxesObjects)
             array = array.filter(entry => entry[1].price > 0)
@@ -130,12 +152,10 @@ export class resultController {
         }
         finalTotal = finalTotal + taxesTotal;
 
-        let [peopleTotal, peopleArrayObjects] = resultController.handlePeopleResult(peopleSortedObjects, finalTotal);
-        if (finalTotal != resultController.prevFinalTotal) {
-            renderFinalTotal(finalTotal);
-            resultController.prevFinalTotal = finalTotal;
+        function logicRenderMismatch(finalTotal, peopleTotal, peopleArrayObjects) {
             clearPaymentMismatch();
             if (finalTotal - peopleTotal > 0 && peopleArrayObjects.length > 0) {
+                // console.log("called Payment Mismatch");
                 renderPaymentMismatch({
                     name: "Payment mismatch",
                     type: "error",
@@ -146,24 +166,23 @@ export class resultController {
                 })
             }
         }
-        if (resultController.compareTwoObjects(peopleArrayObjects, resultController.prevPeopleObjects) == false) {
+
+        let [peopleTotal, peopleArrayObjects] = resultController.handlePeopleResult(peopleSortedObjects, finalTotal);
+        if (finalTotal != resultController.prevFinalTotal || resultController.prevCurrency !== currentCurrency) {
+            renderFinalTotal(finalTotal);
+            resultController.prevFinalTotal = finalTotal;
+            logicRenderMismatch(finalTotal, peopleTotal, peopleArrayObjects);
+        }
+        if (resultController.compareTwoObjects(peopleArrayObjects, resultController.prevPeopleObjects) == false || resultController.prevCurrency !== currentCurrency) {
             clearFinalItem();
             peopleArrayObjects.forEach(entry => {
                 renderFinalItem(entry);
             })
             resultController.prevPeopleObjects = resultController.returnCopyObj(peopleArrayObjects);
-            clearPaymentMismatch();
-            if (finalTotal - peopleTotal > 0) {
-                renderPaymentMismatch({
-                    name: "Payment mismatch",
-                    type: "error",
-                    rate: 0,
-                    price: 0,
-                    maxPrice: 0,
-                    calculatedPay: finalTotal - peopleTotal
-                })
-            }
+            logicRenderMismatch(finalTotal, peopleTotal, peopleArrayObjects);
         }
+
+        resultController.prevCurrency = currentCurrency;
 
         // if (resultController.compareTwoObjects(peopleSortedObjects, resultController.prevPeopleObjects) == false) {
         //     clearPeopleItem();

@@ -63,10 +63,8 @@ ${renderDropdownOptions()}
 </div>
 <label class="validator w-full items-center flex flex-row gap-3">
 </label>
-<div class="tooltip tooltip-left" data-tip="hello">
-<button class="btn rounded-full">
+<div class="tooltip tooltip-left flex" data-tip="hello">
 <i class="fa-solid fa-question"></i>
-</button>
 </div>
 </div>
 </div>`

@@ -2,16 +2,4 @@
   --font-sans: "Be Vietnam Pro", "sans-serif";
 }
 
-.liquid-glass {
-  isolation: isolate;
-  -webkit-backdrop-filter: blur(6px) url(#glass-distortion3);
-  backdrop-filter: blur(10px) url(#glass-distortion3);
-  border-radius: 12px;
-  border-width: 2px;
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-.animate-bg{
-    background: url('../assets/bg.gif');
-    mix-blend-mode: screen;
-}
+@import "loader.css";
