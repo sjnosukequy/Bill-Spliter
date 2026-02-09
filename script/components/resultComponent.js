@@ -38,10 +38,10 @@ function formatNumber(number) {
 
 function createSubtotalItem(name, value, amount, total) {
     let subtotalTemplate = `
-<div class="flex flex-row items-baseline gap-3">
-<span>${name} (${amount} x ${formatNumber(value)} ${currency()})</span>
-<div class="flex-1 border-b border-dashed"></div>
-<span class="ml-auto">${formatNumber(total)} ${currency()}</span>
+<div class="flex flex-col md:flex-row items-baseline gap-3">
+<span class="line-clamp-3">${name} (${amount} x ${formatNumber(value)} ${currency()})</span>
+<div class="hidden md:block flex-1 border-b border-dashed"></div>
+<span class="ml-auto text-right line-clamp-3">${formatNumber(total)} ${currency()}</span>
 </div>`;
     return document.createRange().createContextualFragment(subtotalTemplate);
 }
@@ -62,10 +62,10 @@ export function renderSubtotalItem(SubtotalObject) {
 
 function createTaxItem(name, value) {
     let taxTemplate = `
-<div class="flex flex-row items-baseline gap-3">
-<span class="text-error">${name}</span>
-<div class="flex-1 border-b border-error border-dashed"></div>
-<span class="text-error">+${formatNumber(value)} ${currency()}</span>
+<div class="flex flex-col md:flex-row items-baseline gap-3">
+<span class="text-error line-clamp-3">${name}</span>
+<div class="hidden md:block flex-1 border-b border-error border-dashed"></div>
+<span class="text-error ml-auto text-right line-clamp-3">+${formatNumber(value)} ${currency()}</span>
 </div>
 `;
     return document.createRange().createContextualFragment(taxTemplate);
@@ -86,10 +86,10 @@ export function renderTaxItem(TaxesObject) {
 
 function createDiscountItem(name, value) {
     let discountTemplate = `
-<div class="flex flex-row items-baseline gap-3">
-<span class="text-success">${name}</span>
-<div class="flex-1 border-b border-success border-dashed"></div>
-<span class="text-success">-${formatNumber(value)} ${currency()}</span>
+<div class="flex flex-col md:flex-row items-baseline gap-3">
+<span class="text-success line-clamp-3">${name}</span>
+<div class="hidden md:block flex-1 border-b border-success border-dashed"></div>
+<span class="text-success ml-auto text-right line-clamp-3">-${formatNumber(value)} ${currency()}</span>
 </div>
 `;
     return document.createRange().createContextualFragment(discountTemplate);
@@ -139,10 +139,10 @@ function generatePeopleCause(type, rate, price, maxPrice, value) {
 
 function createPeopleItem(name, type, rate, price, maxPrice, value) {
     let peopleTemplate = `
-<div class="flex flex-row items-baseline gap-3">
-<span class="${peopleCausesKey.includes(type) ? "text-primary" : "text-error"}">${name}</span>
-<div class="flex-1 border-b ${peopleCausesKey.includes(type) ? "border-primary" : "border-error"} border-dashed"></div>
-<span class="${peopleCausesKey.includes(type) ? "text-primary" : "text-error"}">${generatePeopleCause(type, rate, price, maxPrice, value)}</span>
+<div class="flex flex-col md:flex-row items-baseline gap-3">
+<span class="${peopleCausesKey.includes(type) ? "text-primary" : "text-error"} line-clamp-3">${name}</span>
+<div class="flex-1 hidden md:block border-b ${peopleCausesKey.includes(type) ? "border-primary" : "border-error"} border-dashed"></div>
+<span class="${peopleCausesKey.includes(type) ? "text-primary" : "text-error"} ml-auto text-right line-clamp-3">${generatePeopleCause(type, rate, price, maxPrice, value)}</span>
 </div>
 `;
     return document.createRange().createContextualFragment(peopleTemplate);

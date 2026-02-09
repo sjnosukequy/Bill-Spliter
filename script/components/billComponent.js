@@ -4,7 +4,7 @@ import { debounce } from "../utils/debounce.js";
 import {minusIcon} from "../libs/icon/icons/minusIcon.js"
 
 let billTemplate = `
-<div class="flex flex-row gap-2">
+<div class="flex flex-col md:flex-row gap-2">
 <input
 name="bill-name"
 type="text"
@@ -32,7 +32,7 @@ placeholder="Item Price"
 pattern="[0-9]*"
 min="1" />
 </label>
-<button class="btn btn-error p-3 delete-bill-item-button">
+<button class="btn btn-error p-3 delete-bill-item-button w-fit">
 <i class="fa-solid fa-minus"></i>
 </button>
 </div>`

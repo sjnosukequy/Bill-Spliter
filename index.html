@@ -157,10 +157,10 @@
               <div class="flex flex-col gap-7">
                 <!-- SubTotal -->
                 <div class="bg-base-100 border border-slate-200 p-5 rounded-lg flex flex-col gap-3">
-                  <div class="flex flex-row justify-between text-lg">
-                    <p class="font-bold">SubTotals:</p>
+                  <div class="flex flex-col md:flex-row justify-between text-lg">
+                    <p class="font-bold line-clamp-1">SubTotals:</p>
                     <p
-                      class="font-bold"
+                      class="font-bold line-clamp-1"
                       id="subtotal-total">
                       0 $
                     </p>
@@ -172,10 +172,10 @@
 
                 <!-- Discount -->
                 <div class="bg-base-100 border border-success p-5 rounded-lg flex flex-col gap-3">
-                  <div class="flex flex-row justify-between text-success text-lg">
-                    <p class="font-bold">Discounts:</p>
+                  <div class="flex flex-col md:flex-row justify-between text-success text-lg">
+                    <p class="font-bold line-clamp-1">Discounts:</p>
                     <p
-                      class="font-bold"
+                      class="font-bold line-clamp-1"
                       id="discount-total">
                       -0 $
                     </p>
@@ -187,10 +187,10 @@
 
                 <!-- Taxes -->
                 <div class="bg-base-100 border border-error p-5 rounded-lg flex flex-col gap-3">
-                  <div class="flex flex-row justify-between text-error text-lg">
-                    <p class="font-bold">Taxes/Fees/Tips:</p>
+                  <div class="flex flex-col md:flex-row justify-between text-error text-lg">
+                    <p class="font-bold line-clamp-1">Taxes/Fees/Tips:</p>
                     <p
-                      class="font-bold"
+                      class="font-bold line-clamp-1"
                       id="tax-total">
                       +0 $
                     </p>
@@ -201,10 +201,10 @@
                 </div>
 
                 <div class="bg-base-100 border border-primary p-5 rounded-lg flex flex-col gap-3">
-                  <div class="flex flex-row justify-between text-primary text-lg">
-                    <p class="font-bold">Final Total:</p>
+                  <div class="flex flex-col md:flex-row justify-between text-primary text-lg">
+                    <p class="font-bold line-clamp-1">Final Total:</p>
                     <p
-                      class="font-bold"
+                      class="font-bold line-clamp-1"
                       id="final-total">
                       0 $
                     </p>
@@ -228,19 +228,19 @@
             </div>
           </div> -->
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 p-10">
+            <div class="grid grid-cols-1 gap-5 p-10 pt-0">
               <button
                 id="export-png"
                 class="btn btn-neutral flex flex-row gap-3 items-center p-3 rounded-lg w-full">
                 <i class="fa-solid fa-file-export"></i>
                 <p>Export PNG</p>
               </button>
-              <button
+              <!-- <button
                 id="export-pdf"
                 class="btn btn-neutral flex flex-row gap-3 items-center p-3 rounded-lg w-full">
                 <i class="fa-solid fa-file-export"></i>
                 <p>Export PDF</p>
-              </button>
+              </button> -->
             </div>
           </div>
         </div>

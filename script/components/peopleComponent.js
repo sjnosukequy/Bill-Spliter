@@ -45,7 +45,7 @@ class="input input-bordered w-full" />
 </button>
 </div>
 
-<div class="flex flex-row gap-2 w-full">
+<div class="flex flex-col md:flex-row gap-2 w-full">
 <div class="dropdown dropdown-start">
 <div
 tabindex="0"

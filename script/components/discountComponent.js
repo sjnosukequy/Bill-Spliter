@@ -21,7 +21,7 @@ name="discount-name"
 type="text"
 placeholder="Discount Name"
 class="input input-bordered w-full" />
-<div class="flex flex-row gap-2 w-full">
+<div class="flex flex-col md:flex-row gap-2 w-full">
 <div class="dropdown dropdown-start">
 <div
 tabindex="0"
@@ -40,7 +40,7 @@ ${renderDropdownOptions()}
 <label class="validator w-full items-center flex flex-row gap-3">
 
 </label>
-<button class="btn btn-error p-3 delete-discount-item-button">
+<button class="btn btn-error p-3 delete-discount-item-button w-fit">
 <i class="fa-solid fa-minus"></i>
 </button>
 </div>
