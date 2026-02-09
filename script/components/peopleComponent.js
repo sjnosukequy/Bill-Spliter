@@ -52,7 +52,7 @@ tabindex="0"
 role="button"
 name="people-type-button"
 value="${peopleKeys[0]}"
-class="btn whitespace-nowrap">
+class="btn whitespace-nowrap w-full">
 ${peopleType[peopleKeys[0]]}
 </div>
 <ul

@@ -10,7 +10,7 @@ name="bill-name"
 type="text"
 placeholder="Item Name"
 class="input input-bordered w-full" />
-<label class="input validator">
+<label class="input validator w-full">
 <i class="fa-solid fa-cubes-stacked"></i>
 <input
 name="bill-amount"
@@ -21,7 +21,7 @@ placeholder="Item Amount"
 pattern="[0-9]*"
 min="1" />
 </label>
-<label class="input validator">
+<label class="input validator w-full">
 <i class="fa-solid fa-dollar-sign"></i>
 <input
 name="bill-price"
@@ -32,7 +32,7 @@ placeholder="Item Price"
 pattern="[0-9]*"
 min="1" />
 </label>
-<button class="btn btn-error p-3 delete-bill-item-button w-fit">
+<button class="btn btn-error p-3 delete-bill-item-button w-fit ml-auto">
 <i class="fa-solid fa-minus"></i>
 </button>
 </div>`

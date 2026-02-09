@@ -28,7 +28,7 @@ tabindex="0"
 role="button"
 name="discount-type-button"
 value="${discountKeys[0]}"
-class="btn whitespace-nowrap">
+class="btn whitespace-nowrap w-full">
 ${discountType[discountKeys[0]]}
 </div>
 <ul
@@ -40,7 +40,7 @@ ${renderDropdownOptions()}
 <label class="validator w-full items-center flex flex-row gap-3">
 
 </label>
-<button class="btn btn-error p-3 delete-discount-item-button w-fit">
+<button class="btn btn-error p-3 delete-discount-item-button w-fit ml-auto">
 <i class="fa-solid fa-minus"></i>
 </button>
 </div>

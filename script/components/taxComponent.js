@@ -28,7 +28,7 @@ tabindex="0"
 role="button"
 name="tax-type-button"
 value="${taxKeys[0]}"
-class="btn whitespace-nowrap">
+class="btn whitespace-nowrap w-full">
 ${taxType[taxKeys[0]]}
 </div>
 <ul
@@ -40,7 +40,7 @@ ${renderDropdownOptions()}
 <label class="validator w-full items-center flex flex-row gap-3">
 
 </label>
-<button class="btn btn-error p-3 delete-tax-item-button w-fit">
+<button class="btn btn-error p-3 delete-tax-item-button w-fit ml-auto">
 <i class="fa-solid fa-minus"></i>
 </button>
 </div>
