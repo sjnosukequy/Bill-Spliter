@@ -64,7 +64,11 @@ export class resultController {
                     console.log("skip render")
                     return
                 }
-                if(mutation.target.id == "loader"){
+                if (mutation.target.id == "loader") {
+                    console.log("skip render")
+                    return
+                }
+                if (mutation.target.id == "image-container") {
                     console.log("skip render")
                     return
                 }
