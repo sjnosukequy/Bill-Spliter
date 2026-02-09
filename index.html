@@ -75,7 +75,7 @@
           </div>
         </div>
         <!-- body -->
-        <div class="flex flex-col gap-5">
+        <div class="flex flex-col gap-5 mb-10">
           <div class="w-full bg-base-200 rounded-lg p-10">
             <div class="flex flex-row items-center gap-3">
               <i class="fa-solid fa-user text-lg"></i>
@@ -145,13 +145,15 @@
             </div>
           </div>
 
-          <div class="w-full bg-base-200 rounded-lg p-10 flex flex-col gap-5">
-            <div class="flex flex-row items-center gap-3">
-              <i class="fa-solid fa-calculator text-lg"></i>
-              <p class="font-bold text-lg">Split Results</p>
-            </div>
+          <div class="w-full bg-base-200 rounded-lg flex flex-col">
+            <div
+              class="flex flex-col gap-5 p-10"
+              id="result-img">
+              <div class="flex flex-row items-center gap-3">
+                <i class="fa-solid fa-calculator text-lg"></i>
+                <p class="font-bold text-lg">Split Results</p>
+              </div>
 
-            <div>
               <div class="flex flex-col gap-7">
                 <!-- SubTotal -->
                 <div class="bg-base-100 border border-slate-200 p-5 rounded-lg flex flex-col gap-3">
@@ -226,12 +228,16 @@
             </div>
           </div> -->
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <button class="btn btn-neutral flex flex-row gap-3 items-center p-3 rounded-lg w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 p-10">
+              <button
+                id="export-png"
+                class="btn btn-neutral flex flex-row gap-3 items-center p-3 rounded-lg w-full">
                 <i class="fa-solid fa-file-export"></i>
                 <p>Export PNG</p>
               </button>
-              <button class="btn btn-neutral flex flex-row gap-3 items-center p-3 rounded-lg w-full">
+              <button
+                id="export-pdf"
+                class="btn btn-neutral flex flex-row gap-3 items-center p-3 rounded-lg w-full">
                 <i class="fa-solid fa-file-export"></i>
                 <p>Export PDF</p>
               </button>
@@ -255,6 +261,7 @@
         <div class="banter-loader__box"></div>
       </div>
     </div>
+    <script src="./script/libs/html2canvas/html2canvas-pro.min.js"></script>
     <script
       src="./script/main.js"
       type="module"></script>

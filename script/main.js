@@ -9,6 +9,7 @@ import { parseRenderIcon } from "./libs/icon/iconController.js";
 import { throttleOnce } from "./utils/throttleOnce.js";
 import { removeLoader } from "./controller/loaderController.js";
 import { wait } from "./utils/wait.js";
+import { setupExportPNG } from "./components/exportComponents/exportPNG.js";
 
 document.addEventListener("DOMContentLoaded", async() => {
     setupThemeButton();
@@ -19,12 +20,14 @@ document.addEventListener("DOMContentLoaded", async() => {
     setupDiscount();
     setupPeople();
 
+    setupExportPNG();
+
     const callbacks = {
         renderIcon: throttleOnce(parseRenderIcon, 1000)
     }
 
     setupResultComponent(callbacks);
 
-    await wait(1000);
+    await wait(2000);
     removeLoader();
 })
