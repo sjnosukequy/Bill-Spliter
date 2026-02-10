@@ -9,18 +9,26 @@ let taxType = {
 
 let taxTypeElements = {
     "fixed": `<input name="tax-price" type="number" class="input validator w-full" required placeholder="Value" pattern="[0-9]*" min="1" />`,
-    "percentage": `<input name="tax-price" type="range" class="range range-primary w-full" required min="0" max="100" value="0"/> <input class="range-number-display input max-w-min p-0" disabled value="0%" type="text"/>`
+    "percentage": `<input name="tax-price" type="range" class="range range-primary w-full" required min="0" max="100" value="0"/> <input class="range-number-display input p-0" disabled value="0%" type="text"/>`
 }
 
 let taxKeys = Object.keys(taxType);
 
 let taxTemplate = `
 <div class="flex flex-col gap-2">
+
+<div class="flex flex-row gap-2 w-full">
 <input
 name="tax-name"
 type="text"
 placeholder="Tax Name"
 class="input input-bordered w-full" />
+
+<button class="btn btn-error p-3 delete-tax-item-button w-fit">
+<i class="fa-solid fa-minus"></i>
+</button>
+</div>
+
 <div class="flex flex-col md:flex-row gap-2 w-full">
 <div class="dropdown dropdown-start">
 <div
@@ -37,12 +45,9 @@ class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
 ${renderDropdownOptions()}
 </ul>
 </div>
-<label class="validator w-full items-center flex flex-row gap-3">
+<label class="validator w-full flex flex-col">
 
 </label>
-<button class="btn btn-error p-3 delete-tax-item-button w-fit ml-auto">
-<i class="fa-solid fa-minus"></i>
-</button>
 </div>
 </div>`
 

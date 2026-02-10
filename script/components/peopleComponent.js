@@ -14,7 +14,7 @@ let peopleType = {
 let peopleTypeElements = {
     "equal": ``,
     "reduction": `<input name="people-price" type="number" class="input validator w-full" required placeholder="Value" pattern="[0-9]*" min="0" key="price"/>`,
-    "rate": `<input name="people-price" type="range" class="range range-primary w-full" required min="0" max="100" value="0" key="rate"/> <input class="range-number-display input max-w-min p-0" disabled value="0%" type="text"/>`,
+    "rate": `<input name="people-price" type="range" class="range range-primary w-full" required min="0" max="100" value="0" key="rate"/> <input class="range-number-display input p-0" disabled value="0%" type="text"/>`,
     "fixed": `<input name="people-price" type="number" class="input validator w-full" required placeholder="Value" pattern="[0-9]*" min="0" key="price"/>`,
     "paid": ``,
     "NotExceed": `<input name="people-price" type="number" class="input validator w-full" required placeholder="Value" pattern="[0-9]*" min="0" key="maxPrice"/>`,
@@ -45,7 +45,7 @@ class="input input-bordered w-full" />
 </button>
 </div>
 
-<div class="flex flex-col md:flex-row gap-2 w-full">
+<div class="flex flex-col md:flex-row gap-2 w-full relative">
 <div class="dropdown dropdown-start">
 <div
 tabindex="0"
@@ -61,9 +61,9 @@ class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
 ${renderDropdownOptions()}
 </ul>
 </div>
-<label class="validator w-full items-center flex flex-row gap-3">
+<label class="validator w-full items-center flex-col">
 </label>
-<div class="tooltip tooltip-left flex" data-tip="hello">
+<div class="tooltip tooltip-left self-end mb-[8px] hidden md:flex" data-tip="hello">
 <i class="fa-solid fa-question"></i>
 </div>
 </div>
